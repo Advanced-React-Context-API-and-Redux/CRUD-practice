@@ -38,16 +38,16 @@ export default function AnimalForm({animals, updateAnimals, update }) {
     const deleteAnimal = animal => {
         // How can we delete an animal?
         axiosWithAuth()
-        .delete()
-        .then(response => {
-            console.log('response from deleteAnimal axios', response.data);
-            updateAnimals(animals.filter(item => item.id !==animal.id));
+          .delete()
+          .then(response => {
+            console.log("response", response.data);
+            updateAnimals(animals.filter(item => item.id !== animal.id));
             updating(false);
-        })
-        .catch(error => {
-            console.log(`error with delete ${error}`);
-        });
-    };
+          })
+          .catch(error => {
+            console.log(`error ${error}`);
+          });
+      };
 
     return (
         <div className="animals-list">

@@ -5,7 +5,7 @@ export default function Login(props) {
     // How can we log in? What do we need to do?
 
 const [login, setLogin] = useState({
-    usename:'',
+    username:'',
     password: ''
 });
 
