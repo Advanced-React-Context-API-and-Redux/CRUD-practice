@@ -18,7 +18,9 @@ const handleChange = (event) =>{
 };
 const handleSubmit = (event) => {
 event.preventDefault()
-axiosWithAuth().post().then(response => {
+axiosWithAuth()
+.post('login', login)
+.then(response => {
     console.log('response', response)
     localStorage.setItem('token', response.data.payload)
     //make history a hook
