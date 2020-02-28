@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const initialAnimal = {
     name: '',
@@ -21,6 +22,14 @@ export default function AnimalForm({animals, updateAnimals }) {
         // How can we update the animal information?
         // Where can we get the ID? 
         // Where is the information stored?
+        axiosWithAuth() 
+        .put(`animals/${animalToUpdate.id}`, animalToUpdate)
+        .then(response => {
+            console.log(response.data)
+        })
+        .catch(error => {
+            console.log(`erros with PUT ${error}`);
+        })
     }
 
     const deleteAnimal = animal => {

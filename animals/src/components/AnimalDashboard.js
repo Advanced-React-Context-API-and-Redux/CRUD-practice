@@ -8,7 +8,8 @@ export default function AnimalDashboard() {
     
     const [ animals, setAnimals ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(false);
-    const [error, setError] = useState(false)
+    const [error, setError] = useState(false);
+    const [update, setUpdate] = useState(false)
 
     //const [isLoading, setIsLoading] = useState(false); => then add isLoading to dependencyArray
     
