@@ -7,7 +7,7 @@ const initialAnimal = {
     classification: { species:'' }
 }
 
-export default function AnimalForm({animals, updateAnimals }) {
+export default function AnimalForm({animals, updateAnimals, update }) {
 
     const [ updating, setUpdating ] = useState(false);
     const [animalToUpdate, setAnimalToUpdate] = useState(initialAnimal);
@@ -26,15 +26,28 @@ export default function AnimalForm({animals, updateAnimals }) {
         .put(`animals/${animalToUpdate.id}`, animalToUpdate)
         .then(response => {
             console.log(response.data)
+            updateAnimals(animals);
+            update(true);
+            setUpdating(false);
         })
         .catch(error => {
-            console.log(`erros with PUT ${error}`);
+            console.log(`error with PUT ${error}`);
         })
     }
 
     const deleteAnimal = animal => {
         // How can we delete an animal?
-    }
+        axiosWithAuth()
+        .delete()
+        .then(response => {
+            console.log('response from deleteAnimal axios', response.data);
+            updateAnimals(animals.filter(item => item.id !==animal.id));
+            updating(false);
+        })
+        .catch(error => {
+            console.log(`error with delete ${error}`);
+        });
+    };
 
     return (
         <div className="animals-list">

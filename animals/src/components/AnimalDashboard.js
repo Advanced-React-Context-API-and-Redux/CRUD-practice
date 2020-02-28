@@ -8,7 +8,6 @@ export default function AnimalDashboard() {
     
     const [ animals, setAnimals ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(false);
-    const [error, setError] = useState(false);
     const [update, setUpdate] = useState(false)
 
     //const [isLoading, setIsLoading] = useState(false); => then add isLoading to dependencyArray
@@ -17,28 +16,33 @@ export default function AnimalDashboard() {
     // How can we capture and set that data to state?
 
     useEffect(() => {
-        setIsLoading(false)
-        axiosWithAuth()
-        .get('animals')
-        .then(response => {
-            console.log(response.data)
-            setAnimals(response.data)
-            setIsLoading(false)
-            console.log('should be false',isLoading)
+        setIsLoading(true);
+        setTimeout(() => {
+            axiosWithAuth()
+            .get('animals')
+            .then(response => {
+                console.log('reponse from axios with auth',response.data)
+                setAnimals(response.data)
+                setUpdate(false)
+                setIsLoading(false);
         })
         .catch(error => {
-            setIsLoading(false)
-            setError(error)
-            console.log(`Error fetching animals ${error.response}`)
-        })
-    },[])
+            console.log(`Error fetching animals ${error.response}`
+            );
+            setIsLoading(false);
+        }, );
+        },2000);
+    },[update]);
 
     return(
         <div className="dash">
-            { isLoading && <div style={{ color: `green`, fontSize: 34, marginLeft: 20 }}> Loading ...</div> }
-            {error && <div style={{ color: `red`, fontSize: 34, marginLeft: 20 }}>You messed up...</div> }
-            <AnimalForm animals={animals} updateAnimals={setAnimals} />
+           {update ? 'LOADING' : ''}
+            <AnimalForm 
+            animals={animals} 
+            updateAnimals={setAnimals} 
+            update={setUpdate}
+            />
             <AnimalList animals={animals} />
         </div>
-    )
+    );
 }
