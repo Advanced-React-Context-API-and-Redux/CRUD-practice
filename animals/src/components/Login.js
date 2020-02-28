@@ -1,12 +1,18 @@
 import React, { useState } from "react";
+// useHistory hook (new way)
+// import { useHistory } from "react-router-dom";
 
 import { axiosWithAuth } from "../utils/axiosWithAuth.js";
 
 export default function Login(props) {
+    console.log(`Login props`, props);
+
     const [ login, setLogin ] = useState({
         username: '',
         password: ''
     })
+
+    // const history = useHistory();
 
     const handleChange = e => {
         e.preventDefault();
@@ -19,7 +25,9 @@ export default function Login(props) {
             .post('login', login)
             .then(res => {
                 // console.log(res)
-                window.localStorage.setItem('token', res.data.payload)
+                window.localStorage.setItem('token', res.data.payload);
+                // history.push('/creatures');
+                props.history.push('/creatures');
             })
             .catch(err => console.log(`There was an error`, err.response))
     }
