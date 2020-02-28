@@ -36,7 +36,7 @@ export default function AnimalForm({animals, updateAnimals, setDependency }) {
             .delete(`animals/${animalToUpdate.id}`, animal)
             .then(res => {
                 console.log(res.data);
-                
+                updateAnimals(animals.filter(item => item.id !== animalToUpdate.id))
             })
             .catch(err => {
                 console.log(err.response);
