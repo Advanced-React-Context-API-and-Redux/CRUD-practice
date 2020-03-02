@@ -1,5 +1,6 @@
 body {
-  background: url('./assests/safari.jpg') ;
+  background: url('./assets/safari.jpg') ;
+  background-size: cover;
 }
 
 .App {

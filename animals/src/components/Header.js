@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from '@material-ui/core/Button';
 
 export default function Header() {
 
@@ -15,6 +16,9 @@ export default function Header() {
                 <Link className="nav-link" to ="/creatures">Animals</Link>
                 <Link className="nav-link" to ="/login" onClick={signOut}>Sign out</Link>
             </nav>
+            <Button variant="contained" color="primary">
+                Hello World
+            </Button> 
         </div>
     )
 }
